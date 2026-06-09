@@ -1,8 +1,9 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
-#     "openai",
+#     "groq",
 #     "pydantic",
+#     "python-dotenv",
 # ]
 # ///
 
@@ -12,19 +13,18 @@ import argparse
 import logging
 from ai_cli.agent import AIAgent
 
+
 def main():
     parser = argparse.ArgumentParser(
         description="AI Code Assistant - A conversational AI agent with file editing capabilities"
     )
-    parser.add_argument(
-        "--api-key", help="XAI API key (or set XAI_API_KEY env var)"
-    )
+    parser.add_argument("--api-key", help="GROQ API key (or set GROQ_API_KEY env var)")
     args = parser.parse_args()
 
-    api_key = args.api_key or os.environ.get("XAI_API_KEY")
+    api_key = args.api_key or os.environ.get("GROQ_API_KEY")
     if not api_key:
         print(
-            "Error: Please provide an API key via --api-key or XAI_API_KEY environment variable"
+            "Error: Please provide an API key via --api-key or GROQ_API_KEY environment variable"
         )
         sys.exit(1)
 

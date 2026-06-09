@@ -3,3 +3,5 @@ demo
 agent.log
 bug_report.md
 *.code-workspace
+# Build distributions
+dist/

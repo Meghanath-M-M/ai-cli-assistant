@@ -164,6 +164,7 @@ class AIAgent:
 
     def chat(self, user_input: str) -> str:
         import json
+
         logging.info(f"User input: {user_input}")
         self.messages.append({"role": "user", "content": user_input})
 
@@ -174,14 +175,14 @@ class AIAgent:
                     "name": tool.name,
                     "description": tool.description,
                     "parameters": tool.input_schema,
-                }
+                },
             }
             for tool in self.tools
         ]
-        
+
         system_msg = {
             "role": "system",
-            "content": "You are a helpful coding assistant operating in a terminal environment. Output only plain text without markdown formatting, as your responses appear directly in the terminal. Be concise but thorough, providing clear and practical advice with a friendly tone. Don't use any asterisk characters in your responses."
+            "content": "You are a helpful coding assistant operating in a terminal environment. Output only plain text without markdown formatting, as your responses appear directly in the terminal. Be concise but thorough, providing clear and practical advice with a friendly tone. Don't use any asterisk characters in your responses.",
         }
 
         while True:
@@ -206,8 +207,8 @@ class AIAgent:
                             "type": "function",
                             "function": {
                                 "name": tool_call.function.name,
-                                "arguments": tool_call.function.arguments
-                            }
+                                "arguments": tool_call.function.arguments,
+                            },
                         }
                         for tool_call in message.tool_calls
                     ]
@@ -220,16 +221,18 @@ class AIAgent:
                             function_args = json.loads(tool_call.function.arguments)
                         except json.JSONDecodeError:
                             function_args = {}
-                        
+
                         result = self._execute_tool(function_name, function_args)
                         logging.info(f"Tool result: {result[:500]}...")
-                        
-                        self.messages.append({
-                            "role": "tool",
-                            "tool_call_id": tool_call.id,
-                            "name": function_name,
-                            "content": result
-                        })
+
+                        self.messages.append(
+                            {
+                                "role": "tool",
+                                "tool_call_id": tool_call.id,
+                                "name": function_name,
+                                "content": result,
+                            }
+                        )
                 else:
                     return message.content if message.content else ""
 

@@ -1,10 +1,10 @@
-# Single-File AI Agent Tutorial
+# AI CLI Assistant
 
-Build a complete AI agent in 218 lines of Python. No frameworks, no complexity. Just clean code that shows exactly how agents work.
+A packaged, functional AI assistant operating right from your terminal. No heavy frameworks, just a clean, conversational agent built using Groq and Llama.
 
-This tutorial demonstrates a working agent that can read, write, and edit files through natural conversation with Claude. Everything runs from a single Python file using `uv`'s inline dependencies: no virtual environments, no pip installs, no dependency conflicts.
+This repository demonstrates a working agent that can read, write, and edit files through natural conversation. It has been structured into a modern Python package using `pyproject.toml` and managed via `uv`, meaning you can install it globally with a single command.
 
-You'll understand how AI agents parse responses, execute tools, and maintain conversation context. The mechanics laid bare, without abstractions.
+You'll understand how AI agents parse responses, execute tools, and maintain conversation context.
 
 ## Credits
 
@@ -14,29 +14,26 @@ The code is based on the tutorial by Thorsten Ball in ["How to Build an Agent"](
 
 ## Features
 
-- Single-file execution.
-- No virtual environment or manual dependency installation required (except for `uv`).
+- Complete Python package structure.
 - The AI agent can:
   - Read file contents.
   - List directory contents.
   - Edit existing files or create new ones.
 - Interactive chat interface.
 - Error handling and feedback.
-- Logging of agent tool usage.
+- Logging of agent tool usage (`agent.log`).
 
 ## Requirements
 
 - `uv` package manager (see installation instructions below)
-- Python 3.12 or higher (though `uv` will [handle this automatically](https://docs.astral.sh/uv/concepts/python-versions/))
-- Anthropic API key (you can get one from [Anthropic's Console](https://console.anthropic.com/settings/keys))
+- Python 3.11 or higher
+- Groq API key (you can get one from [Groq Console](https://console.groq.com/keys))
 
 ## Installing uv
 
-`uv` is an extremely fast Python package manager that simplifies running Python scripts with inline dependencies.
+`uv` is an extremely fast Python package manager that simplifies installing modern Python applications.
 
-It allows you to run Python scripts [without needing to create a virtual environment or manually install dependencies](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies).
-
-To [install](https://docs.astral.sh/uv/getting-started/installation/) `uv`::
+To [install](https://docs.astral.sh/uv/getting-started/installation/) `uv`:
 
 ### Linux/macOS
 
@@ -77,10 +74,10 @@ Once installed, you can start the assistant from any terminal using:
 ai-assist
 ```
 
-The first time you run it, the agent will prompt you to enter your Anthropic API key, which it will securely save to `~/.config/ai_cli/config.json`. Alternatively, you can pass it via an environment variable or flag:
+The first time you run it, the agent will prompt you to enter your Groq API key, which it will securely save to `~/.config/ai_cli/config.json` (or the equivalent user config dir). Alternatively, you can pass it via an environment variable or flag:
 
 ```bash
-export ANTHROPIC_API_KEY="your-api-key-here"
+export GROQ_API_KEY="your-api-key-here"
 ai-assist
 ```
 
